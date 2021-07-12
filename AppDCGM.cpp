@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 
     ck(dcgmInit());
     ck(dcgmStartEmbedded(DCGM_OPERATION_MODE_AUTO, &dcgmHandle));
-    ck(dcgmGroupCreate(dcgmHandle, DCGM_GROUP_DEFAULT, "test", &groupId));
+    ck(dcgmGroupCreate(dcgmHandle, DCGM_GROUP_DEFAULT, reinterpret_cast<char*>("test"), &groupId));
     
     metricGroups.version = dcgmProfGetMetricGroups_version;
     metricGroups.groupId = groupId;
