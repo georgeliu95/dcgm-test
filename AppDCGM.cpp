@@ -57,9 +57,15 @@ int main(int argc, char **argv)
     dcgmHandle_t dcgmHandle = reinterpret_cast<dcgmHandle_t>(nullptr);
     dcgmProfGetMetricGroups_t metricGroups;
     std::memset(&metricGroups, 0, sizeof(metricGroups));
+    dcgmGpuGrp_t groupId;
 
     ck(dcgmInit());
     ck(dcgmStartEmbedded(DCGM_OPERATION_MODE_AUTO, &dcgmHandle));
+    ck(dcgmGroupCreate(dcgmHandle, DCGM_GROUP_DEFAULT, "test", &groupId));
+    
+    metricGroups.version = dcgmProfGetMetricGroups_version;
+    metricGroups.groupId = groupId;
+
     ck(dcgmProfGetSupportedMetricGroups(dcgmHandle, &metricGroups));
     printf("Num of metricGroups is %u\n", metricGroups.numMetricGroups);
 
