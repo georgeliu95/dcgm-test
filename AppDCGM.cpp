@@ -74,6 +74,8 @@ int main(int argc, char **argv)
     watchFields.version = dcgmProfWatchFields_version;
     watchFields.groupId = groupId;
     watchFields.maxKeepAge = 15;
+    watchFields.fieldIds[0] = DCGM_FI_PROF_SM_ACTIVE;
+    watchFields.numFieldIds = 1;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
     // DCGM_FI_PROF_SM_ACTIVE
 
