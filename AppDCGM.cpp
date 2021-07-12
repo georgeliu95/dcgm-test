@@ -10,6 +10,7 @@
 #include "helper_cuda.h"
 
 #include "dcgm_structs.h"
+#include "dcgm_agent.h"
 
 /* Matrix size */
 #define N (275)
