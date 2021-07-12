@@ -8,8 +8,20 @@
 #include <cuda_runtime.h>
 #include "helper_cuda.h"
 
+#include "dcgm_structs.h"
+
 /* Matrix size */
 #define N (275)
+
+inline bool check(dcgmReturn_t res, int iLine, const char *szFile) {
+    if (res != DCGM_ST_OK) {
+        LOG(ERROR) << "DCGM runtime API error " << errorString(res) << " at line " << iLine << " in file " << szFile;
+        return false;
+    }
+    return true;
+}
+
+#define ck(call) check(call, __LINE__, __FILE__)
 
 /* Host implementation of a simple version of sgemm */
 static void simple_sgemm(int n, float alpha, const float *A, const float *B,
@@ -38,6 +50,16 @@ static void simple_sgemm(int n, float alpha, const float *A, const float *B,
 /* Main */
 int main(int argc, char **argv)
 {
+
+    dcgmReturn_t result;
+    dcgmHandle_t dcgmHandle{nullptr};
+    dcgmProfGetMetricGroups_t metricGroups;
+
+    ck(dcgmInit());
+    ck(dcgmStartEmbedded(DCGM_OPERATION_MODE_AUTO, &dcgmHandle));
+    ck(dcgmProfGetSupportedMetricGroups(dcgmHandle, &metricGroups));
+    printf("Num of metricGroups is %u\n", metricGroups.numMetricGroups);
+
     cublasStatus_t status;
     float *h_A;
     float *h_B;
@@ -248,4 +270,17 @@ int main(int argc, char **argv)
         printf("simpleCUBLAS test failed.\n");
         exit(EXIT_FAILURE);
     }
+
+cleanup:
+    std::cout << "Cleaning up. \n";
+    // if (deviceConfigList)
+    //     delete[] deviceConfigList;
+    // dcgmGroupDestroy(dcgmHandle, myGroupId);
+    // dcgmStatusDestroy(statusHandle);
+    // if (standalone)
+    //     dcgmDisconnect(dcgmHandle);
+    // else
+    //     dcgmStopEmbedded(dcgmHandle);
+    ck(dcgmShutdown());
+    return EXIT_FAILURE;
 }
