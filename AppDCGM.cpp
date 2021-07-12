@@ -78,6 +78,8 @@ int main(int argc, char **argv)
     watchFields.numFieldIds = 1;
     watchFields.updateFreq = 1000;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
+
+    ck(dcgmUpdateAllFields(dcgmHandle, 1));
     
     dcgmFieldValue_v1 values[DCGM_FI_MAX_FIELDS];
     std::memset(&values[0], 0, sizeof(values));
