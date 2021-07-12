@@ -76,6 +76,7 @@ int main(int argc, char **argv)
     watchFields.maxKeepAge = 15;
     watchFields.fieldIds[0] = DCGM_FI_PROF_SM_ACTIVE;
     watchFields.numFieldIds = 1;
+    watchFields.updateFreq = 1000;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
     // DCGM_FI_PROF_SM_ACTIVE
 
