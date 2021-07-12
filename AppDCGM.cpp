@@ -70,6 +70,7 @@ int main(int argc, char **argv)
     printf("Num of metricGroups is %u\n", metricGroups.numMetricGroups);
 
     dcgmProfWatchFields_t watchFields;
+    std::memset(&watchFields, 0, sizeof(watchFields));
     watchFields.version = dcgmProfGetMetricGroups_version;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
 
