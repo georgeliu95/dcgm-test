@@ -73,7 +73,9 @@ int main(int argc, char **argv)
     std::memset(&watchFields, 0, sizeof(watchFields));
     watchFields.version = dcgmProfWatchFields_version;
     watchFields.groupId = groupId;
+    watchFields.maxKeepAge = 15;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
+    // DCGM_FI_PROF_SM_ACTIVE
 
     cublasStatus_t status;
     float *h_A;
