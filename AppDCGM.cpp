@@ -17,7 +17,7 @@
 
 inline bool check(dcgmReturn_t res, int iLine, const char *szFile) {
     if (res != DCGM_ST_OK) {
-        std::cout << "DCGM runtime API error " << errorString(res) << " at line " << iLine << " in file " << szFile;
+        std::cout << "DCGM runtime API error " << errorString(res) << " at line " << iLine << " in file " << szFile << std::endl;
         return false;
     }
     return true;
