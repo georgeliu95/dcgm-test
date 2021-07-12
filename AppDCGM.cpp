@@ -69,6 +69,10 @@ int main(int argc, char **argv)
     ck(dcgmProfGetSupportedMetricGroups(dcgmHandle, &metricGroups));
     printf("Num of metricGroups is %u\n", metricGroups.numMetricGroups);
 
+    dcgmProfWatchFields_t watchFields;
+    watchFields.version = dcgmProfGetMetricGroups_version;
+    ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
+
     cublasStatus_t status;
     float *h_A;
     float *h_B;
