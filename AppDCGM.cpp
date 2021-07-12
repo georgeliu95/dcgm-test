@@ -206,6 +206,8 @@ int main(int argc, char **argv)
     /* Performs operation using cublas */
     status = cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, N, N, N, &alpha, d_A,
                          N, d_B, N, &beta, d_C, N);
+    ck(dcgmGetLatestValuesForFields(dcgmHandle, 0, watchFields.fieldIds, watchFields.numFieldIds, values));
+    std::cout << values[DCGM_FI_PROF_SM_ACTIVE].status << values[DCGM_FI_PROF_SM_ACTIVE].value.dbl << std::endl;
 
     if (status != CUBLAS_STATUS_SUCCESS)
     {
