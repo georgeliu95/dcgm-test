@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 /* Includes, cuda */
 #include <cublas_v2.h>
@@ -52,7 +53,7 @@ int main(int argc, char **argv)
 {
 
     dcgmReturn_t result;
-    dcgmHandle_t dcgmHandle{nullptr};
+    dcgmHandle_t dcgmHandle = reinterpret_cast<dcgmHandle_t>(nullptr);
     dcgmProfGetMetricGroups_t metricGroups;
 
     ck(dcgmInit());
