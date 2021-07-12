@@ -72,6 +72,7 @@ int main(int argc, char **argv)
     dcgmProfWatchFields_t watchFields;
     std::memset(&watchFields, 0, sizeof(watchFields));
     watchFields.version = dcgmProfWatchFields_version;
+    watchFields.groupId = groupId;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
 
     cublasStatus_t status;
