@@ -56,6 +56,7 @@ int main(int argc, char **argv)
     dcgmReturn_t result;
     dcgmHandle_t dcgmHandle = reinterpret_cast<dcgmHandle_t>(nullptr);
     dcgmProfGetMetricGroups_t metricGroups;
+    std::memset(&metricGroups, 0, sizeof(metricGroups));
 
     ck(dcgmInit());
     ck(dcgmStartEmbedded(DCGM_OPERATION_MODE_AUTO, &dcgmHandle));
