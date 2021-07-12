@@ -296,7 +296,7 @@ int main(int argc, char **argv)
     }
 
     ck(dcgmGetLatestValuesForFields(dcgmHandle, 0, watchFields.fieldIds, watchFields.numFieldIds, values));
-    std::cout << values[DCGM_FI_PROF_SM_ACTIVE].value.dbl << std::endl;
+    std::cout << values[DCGM_FI_PROF_SM_ACTIVE].status << values[DCGM_FI_PROF_SM_ACTIVE].value.dbl << std::endl;
 cleanup:
     std::cout << "Cleaning up. \n";
     // if (deviceConfigList)
