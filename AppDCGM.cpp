@@ -301,7 +301,7 @@ cleanup:
     //     dcgmDisconnect(dcgmHandle);
     // else
     //     dcgmStopEmbedded(dcgmHandle);
-    cl(dcgmGroupDestroy(dcgmHandle, myGroupId));
+    cl(dcgmGroupDestroy(dcgmHandle, groupId));
     ck(dcgmStopEmbedded(dcgmHandle));
     ck(dcgmShutdown());
     return EXIT_FAILURE;
