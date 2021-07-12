@@ -79,9 +79,10 @@ int main(int argc, char **argv)
     watchFields.updateFreq = 1000;
     ck(dcgmProfWatchFields(dcgmHandle, &watchFields));
     
-    dcgmFieldValue_v1 values[100];
+    dcgmFieldValue_v1 values[DCGM_FI_MAX_FIELDS];
     std::memset(&values[0], 0, sizeof(values));
     ck(dcgmGetLatestValuesForFields(dcgmHandle, 0, watchFields.fieldIds, watchFields.numFieldIds, values));
+    std::cout << values[DCGM_FI_PROF_SM_ACTIVE].value.dbl << std::endl;
 
     cublasStatus_t status;
     float *h_A;
@@ -295,6 +296,7 @@ int main(int argc, char **argv)
     }
 
     ck(dcgmGetLatestValuesForFields(dcgmHandle, 0, watchFields.fieldIds, watchFields.numFieldIds, values));
+    std::cout << values[DCGM_FI_PROF_SM_ACTIVE].value.dbl << std::endl;
 cleanup:
     std::cout << "Cleaning up. \n";
     // if (deviceConfigList)
